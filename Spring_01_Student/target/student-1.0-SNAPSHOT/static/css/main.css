@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+header {
+    width: 99%;
+    height: 20vh;
+    background-color: skyblue;
+    text-align: center;
+}
+
+header h1 {
+    line-height: 20vh;
+}
+
+nav {
+    width: 99%;
+    height: 5vh;
+    background-color: gray;
+    text-align: center;
+}
+
+nav ul {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+nav ul li {
+    margin: auto 40px;
+    line-height: 5vh;
+    color: white;
+    font-weight: bold;
+}
+
+nav ul li:last-child {
+    margin-left: auto;
+}
