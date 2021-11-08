@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <!-- dataSource -->
+    <bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/naraDB"/>
+        <property name="username" value="root"/>
+        <property name="password" value="!Biz12341234"/>
+    </bean>
+
+    <!-- * 트랜잭션 관련 -->
+    <tx:annotation-driven/>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="dataSource" ref="ds"/>
+        <!-- * ds가 객체기 때문에 value 가 아닌 ref 임 -->
+    </bean>
+
+    <!-- * 엔티티를 이용해서 뭔가를 관리하는 .. -->
+    <!-- * JPA 에서 우리가 만들어놓은 모델 객체를 기준으로 테이블을 만들어줌 -->
+    <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="ds"/>
+        <property name="packagesToScan" value="com.csy.student.models"/>
+        <!-- * models 패키지에 들어있는 객체들을 scan 해서 테이블을 만들도록 준비해라 -->
+        <property name="jpaVendorAdapter" >
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.id.new_generator_mapping">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+            </props>
+        </property>
+    </bean>
+
+    <jpa:repositories base-package="com.csy.student.repository"/>
+
+</beans>

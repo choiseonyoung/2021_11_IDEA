@@ -2,5 +2,5 @@
 * tiles-core, tiles-extra 를 dependency 설정
 * layout.jsp 를 만들고 여기에 layout 구성 만들기
 * tiles_layout.xml 파일 생성
-* contxet.xml 에서 UrlBasedViewResolver 를 bean 으로 등록  
+* context.xml 에서 UrlBasedViewResolver 를 bean 으로 등록  
 viewClass property 에 TilesView 설정

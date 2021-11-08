@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: lightpink;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    background-color: lightgray;
+}
+
+nav li {
+    margin: 0 10px;
+    padding: 0.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+nav li:hover {
+    background-color: pink;
+}
+
+footer {
+    background-color: lightgray;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+section.content {
+    flex: 1;
+}

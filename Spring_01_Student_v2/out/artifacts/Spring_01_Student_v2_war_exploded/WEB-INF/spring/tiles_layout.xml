@@ -20,4 +20,20 @@
         <put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
         <!-- * content 라고 돼있는 부분만 value 값을 별도로 설정하겠다 -->
     </definition>
+
+    <!--
+    와일드 카드
+    * : 모든 것 (단어, 스펠 개수에 관계없이)
+    ? : 스펠의 개수만큼
+            a? = a1, a2, aa, ab, ac .. 등과 일치하는 패턴
+            a?? = a11, a21, abb, acc .. 등과 일치하는 패턴
+    -->
+    <!-- * *에 들어가는 값을 가지고 {1} 라고 되어있는 매개변수에 붙이는 것 -->
+    <definition name="ST/*" extends="default">
+        <put-attribute name="content" value="/WEB-INF/views/student/{1}.jsp"></put-attribute>
+    </definition>
+    <!-- * {1}번 대신 첫번째 *값 {2}번 대신 두번째 *값 표시해라 -->
+    <definition name="*/*" extends="default">
+        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/>
+    </definition>
 </tiles-definitions>
