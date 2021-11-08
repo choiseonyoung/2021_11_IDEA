@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<!-- tiles layout 을 설정하기 위한 영역 -->
+<tiles-definitions>
+    <!-- 각각의 fragment 를 설정하는 부분 -->
+    <definition name="default" template="/WEB-INF/views/main_layout.jsp">
+    <!-- * main_layout.jsp 를 기본 레이아웃 폼으로 만들겠다-->
+        <put-attribute name="header" value="/WEB-INF/views/fragment/header.jsp"/>
+        <put-attribute name="nav" value="/WEB-INF/views/fragment/nav.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/views/fragment/footer.jsp"/>
+    </definition>
+
+    <!-- default 로 설정된 부분을 상속받고, content 부분만 별도로 재 설정 (오버라이드) -->
+    <!-- * HOME 이라는 친구는 default 에 설정돼있는 친구(header,nav,content..)를 모두 포함시켜 가져와라 라는 얘기임 -->
+    <definition name="HOME" extends="default">
+        <put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
+        <!-- * content 라고 돼있는 부분만 value 값을 별도로 설정하겠다 -->
+    </definition>
+</tiles-definitions>

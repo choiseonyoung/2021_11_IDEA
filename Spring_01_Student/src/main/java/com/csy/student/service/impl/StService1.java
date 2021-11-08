@@ -1,4 +1,4 @@
-package com.csy.student.service;
+package com.csy.student.service.impl;
 
 import com.csy.student.repository.StDaoImpl;
 import com.csy.student.model.StudentVO;
@@ -23,7 +23,7 @@ import java.util.List;
  *
  * Sub 로 작성된 클래스 모듈은 반드시 인터페이스를 생성하여 결합도를 낮추는 작업이 필요하다
  */
-public class StService {
+public class StService1 {
     
     // interface 로 선언하고 상속받은 class로 초기화(생성)하기
     // StDaoImpl 클래스를 사용하여 StDao 형(type)의 stDao 객체 생성
