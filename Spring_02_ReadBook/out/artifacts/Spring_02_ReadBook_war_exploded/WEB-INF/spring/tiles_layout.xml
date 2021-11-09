@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!-- * 자동완성이 되고, 프로젝트가 이 파일을 잘 인식할 수 있도록? -->
+
+<tiles-definitions>
+    <definition name="*/*" template="/WEB-INF/views/main_layout.jsp">
+        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/>
+    </definition>
+</tiles-definitions>

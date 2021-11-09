@@ -21,7 +21,7 @@
 
     <!-- * 엔티티를 이용해서 뭔가를 관리하는 .. -->
     <!-- * JPA 에서 우리가 만들어놓은 모델 객체를 기준으로 테이블을 만들어줌 -->
-    <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="ds"/>
         <property name="packagesToScan" value="com.csy.student.models"/>
         <!-- * models 패키지에 들어있는 객체들을 scan 해서 테이블을 만들도록 준비해라 -->
@@ -40,6 +40,7 @@
         </property>
     </bean>
 
+    <!-- * repository 를 스캔할 수 있도록 만들어주기 -->
     <jpa:repositories base-package="com.csy.student.repository"/>
 
 </beans>

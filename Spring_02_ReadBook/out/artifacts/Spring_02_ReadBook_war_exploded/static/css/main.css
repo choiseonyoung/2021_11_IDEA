@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+header {
+    background-color: lightpink;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 1px 1px 1px #ddd;
+    text-align: center;
+}
+
+section.content {
+    flex: 1;
+}
+
+footer {
+    background-color: lightgray;
+    color: white;
+    text-align: center;
+    padding: 0.7rem;
+}
+

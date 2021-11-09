@@ -1,0 +1,57 @@
+form {
+    height: 700px;
+    border: 1px solid #eee;
+}
+
+.write_box1,
+.write_box2,
+.write_box3,
+.write_box4{
+    display: flex;
+    width: 1000px;
+    height: 40px;
+    margin: 20px auto;
+}
+
+.isbn,
+.date {
+    width: 55%;
+    margin-right: 10px;
+}
+
+.bookname {
+    width: 45%;
+}
+
+.time1,
+.time2 {
+    width: 20%;
+}
+
+.time1 {
+    margin-right: 5%;
+}
+
+.write_box4 input {
+    height: 70px;
+}
+
+input {
+    width: 100%;
+    border: 1px solid lightgray;
+}
+
+.btn_box {
+    display: flex;
+    width: 1000px;
+    margin: 50px auto;
+    justify-content: flex-end;
+}
+
+button {
+    width: 70px;
+    height: 25px;
+    margin-left: 15px;
+    background-color: #ddd;
+    border: none;
+}
