@@ -5,15 +5,72 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%-- * form 만들 때 사용하는 라이브러리 --%>
 
+<style>
+    form.login_form {
+        width: 400px;
+        padding: 40px;
+        background-color: #eee;
+        text-align: center;
+        border-radius: 20px;
+        box-shadow: 12px 12px 2px 1px rgba(0,0,255,0.3);
+        margin: 20px auto;
+    }
+
+    form.login_form h2 {
+        color: black;
+        font-width: 500;
+    }
+
+    form.login_form h3 {
+        color: darkred;
+        padding: 14px 10px;
+    }
+
+    form.login_form input {
+        background: none;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid lightgray;
+        padding: 14px 10px;
+        width: 200px;
+        outline: none;
+        color: white;
+        border-radius: 25px;
+        transition: 0.2s;
+    }
+
+    form.login_form input:focus {
+        width: 280px;
+        border-color: gray;
+    }
+
+    form.login_form button {
+        background: none;
+        margin: 20px auto;
+        width: 200px;
+        padding: 14px 10px;
+        text-align: center;
+        outline: none;
+        color: black;
+        border: 2px solid rgba(0,0,255,0.3);
+        border-radius: 25px;
+        transition: 0.3s;
+    }
+
+    form.login_form button:hover {
+        background-color: #2ECC71;
+    }
+</style>
+
 <%-- * 위에 taglib 로 선언한 form --%>
-<form:form action="${rootPath}/login">
+<form:form action="${rootPath}/login" cssClass="login_form">
     <fieldset>
-        <legend>로그인</legend>
-        <c:if test="${param.error}">
-            <h3>로그인을 해야 합니다</h3>
+        <h2>로그인</h2>
+        <c:if test="${param.error != null}">
+            <h3>로그인 오류</h3>
         </c:if>
-        <input placeholder="사용자 ID">
-        <input placeholder="비밀번호" type="password">
+        <input placeholder="사용자 ID" name="username">
+        <input placeholder="비밀번호" type="password" name="password">
         <button>로그인</button>
         <button type="button">회원가입</button>
     </fieldset>

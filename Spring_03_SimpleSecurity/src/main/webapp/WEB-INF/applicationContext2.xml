@@ -25,11 +25,12 @@
         <security:csrf token-repository-ref="cookieCsrfTokenRepository"/>
     </security:http>
 
-    <bean id="loginService" class="com.csy.sec.service.LoginService"></bean>
-
     <!-- * 테스트용 사용자 로그인 검사? id가 csy가 비밀번호가 1234면 그 사용자는 ADMIN 이다 -->
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="loginService"/>
-        <!-- * 우리가 만든 loginService를 이용해 로그인을 수행해라 -->
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="csy" authorities="ROLE_ADMIN" password="$2a$04$YsPB6zZN.YT2inOTBtqMwOrE0AzyuubMsCMr8fG9wu4v8jL4305X."/>
+            </security:user-service>
+        </security:authentication-provider>
     </security:authentication-manager>
 </beans>
