@@ -8,8 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Spring_03_Security" />
-        <module name="Spring_03_SimpleSecurity" />
+        <module name="sec" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Spring_03_SimpleSecurity" target="15" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -4,15 +4,20 @@
        xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
 
+    <bean id="cookieCsrfTokenRepository" class="org.springframework.security.web.csrf.CookieCsrfTokenRepository">
+        <property name="cookieHttpOnly" value="false"/>
+    </bean>
+
     <security:http>
         <security:intercept-url pattern="/login" access="permitAll"/>
         <security:intercept-url pattern="/**" access="isAuthenticated()"/>
         <!-- * 로그인으로 요청된 패턴은 누구나 접속할 수 있고, 나머지 부분은 아무도 쓸 수 없게 만들기 -->
-        <security:form-login username-parameter="username" password-parameter="password"/>
+        <security:form-login login-page="/member/login" login-processing-url="/login" username-parameter="username" password-parameter="password"/>
         <security:logout/>
+        <security:csrf token-repository-ref="cookieCsrfTokenRepository"/>
     </security:http>
 
-    <!-- * 테스트용 사용자 로그인 검사? id가 csy가 비밀번호가 1234면 그 사용자는 ADMIN이다 -->
+    <!-- * 테스트용 사용자 로그인 검사? id가 csy가 비밀번호가 1234면 그 사용자는 ADMIN 이다 -->
     <security:authentication-manager>
         <security:authentication-provider>
             <security:user-service>
