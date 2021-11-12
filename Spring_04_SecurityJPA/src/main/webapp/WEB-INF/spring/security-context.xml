@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+    spring security 에 내장된 암호 검사 코드에서 사용할 bean
+    -->
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg index="0" value="4"/>
+    </bean>
+
+    <bean id="cookieCsrfTokenRepository" class="org.springframework.security.web.csrf.CookieCsrfTokenRepository">
+        <property name="cookieHttpOnly" value="false"/>
+    </bean>
+
+    <security:http
+            pattern="/static" security="none" />
+    <security:http
+            pattern="/webjars/**" security="none" />
+
+    <!-- * 구버전에서 () 붙은 건 인식 못할 때가 가끔 있음. 그럴 땐 use-expressions="true" 붙여주면 됨. 여기선 상관X -->
+    <security:http use-expressions="true">
+        <security:intercept-url pattern="/login" access="permitAll"/>
+        <security:intercept-url pattern="/member/mypage" access="permitAll"/>
+        <security:intercept-url pattern="/member/**" access="permitAll"/>
+        <security:intercept-url pattern="/static" access="permitAll()"/>
+        <security:intercept-url pattern="/webjars/**" access="permitAll()"/>
+        <security:intercept-url pattern="/" access="isAuthenticated()"/>
+        <!-- * 로그인으로 요청된 패턴은 누구나 접속할 수 있고, 나머지 부분은 아무도 쓸 수 없게 만들기 -->
+        <security:form-login
+                login-page="/member/login"
+                login-processing-url="/login"
+                username-parameter="username"
+                password-parameter="password"/>
+        <security:logout/>
+        <security:csrf token-repository-ref="cookieCsrfTokenRepository"/>
+    </security:http>
+
+    <context:component-scan base-package="com.csy.sec.service.auth"/>
+    <!-- * 굳이 xml 파일에 bean 을 설정하기 않고 service.auth 패키지에 있는 걸 자동으로 ~ -->
+<!--    <bean id="loginService" class="com.csy.sec.service.auth.LoginService"></bean>-->
+
+    <!-- * 테스트용 사용자 로그인 검사? id가 csy가 비밀번호가 1234면 그 사용자는 ADMIN 이다 -->
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="loginService"/>
+        <!-- * 우리가 만든 loginService를 이용해 로그인을 수행해라 -->
+    </security:authentication-manager>
+</beans>
