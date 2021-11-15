@@ -7,7 +7,7 @@
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <!-- * 필터를 다른 대리자를 통해 설정하겠다. 스프링 시큐리티한테 모든 권한을 .. 이 순간부터 Dispatch가 문지기에서 한 단계 뒤로 물러나고 filter가 문지기 앞에서 먼저 설정 -->
+        <!-- * 필터를 다른 대리자를 통해 설정하겠다. 스프링 시큐리티한테 모든 권한을 .. 이 순간부터 Dispatch 가 문지기에서 한 단계 뒤로 물러나고 filter 가 문지기 앞에서 먼저 설정 -->
     </filter>
 
     <filter-mapping>
