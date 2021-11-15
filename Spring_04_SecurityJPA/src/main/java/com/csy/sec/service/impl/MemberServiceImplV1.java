@@ -3,6 +3,7 @@ package com.csy.sec.service.impl;
 import com.csy.sec.models.UserDetailsVO;
 import com.csy.sec.repository.MemberDao;
 import com.csy.sec.service.MemberService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,10 +12,19 @@ import java.util.List;
 public class MemberServiceImplV1 implements MemberService {
     
     private final MemberDao memDao;
+    /**
+     * security-context.xml 에 선언된 bean 을 가져와서
+     * 와이어드 하여 사용할 준비하기
+     * 
+     * bean 으로 이미 선언이 되었기 때문에
+     * final 로 선언하고 생성자에서 주입받기
+     */
+    private final PasswordEncoder passwordEncoder;
 
     // * 알트+insert - constructor 생성자 만들어주기
-    public MemberServiceImplV1(MemberDao memDao) {
+    public MemberServiceImplV1(MemberDao memDao, PasswordEncoder passwordEncoder) {
         this.memDao = memDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -43,8 +53,24 @@ public class MemberServiceImplV1 implements MemberService {
     }
 
     @Override
-    public void insert(UserDetailsVO userDetailsVO) {
-        memDao.save(userDetailsVO);
+    public void insert(UserDetailsVO userVO) {
+        // * userVO = 회원가입 form 에서 넘겨온 데이터
+
+        // * 이 코드가 핵심
+        /**
+         * Spring security 에서 제공하는 PasswordEncoder(*이건 interface고 실제로 작동하는 건 BCryptPasswordEncoder가 클래스) 를 사용하여 사용자의 비밀번호 암호화 하기
+         */
+        String encPassword = passwordEncoder.encode(userVO.getPassword());
+
+        UserDetailsVO saveVO = userVO.builder()
+                .username(userVO.getUsername())
+                .password(encPassword)
+                .isAccountNonExpired(true)
+                .isEnabled(true)
+                .isCredentialsNonExpired(true)
+                .isAccountNonLocked(true)
+                .build();
+         memDao.save(saveVO);
     }
 
     @Override

@@ -15,6 +15,12 @@
         <url-pattern>*</url-pattern>
     </filter-mapping>
 
+    <!--
+    root context 설정 영역
+    여기는 *-context.xml 처럼 사용하지 말고
+    가급적 context 들을 명시적으로 리스트화 해주는 것이 좋다
+    (*쌤 개인적인 부분. 순서가 가끔 꼬여서 아직 db가 설정되지 않은 상태에서 시큐리티가 작동하는 경우가 있어서 문제를 일으키는 경우들이 있었음)
+     -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>

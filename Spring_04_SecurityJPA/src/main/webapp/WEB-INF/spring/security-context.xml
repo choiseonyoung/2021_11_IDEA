@@ -7,11 +7,19 @@
 
     <!--
     spring security 에 내장된 암호 검사 코드에서 사용할 bean
+
+    AuthenticateProvider 에서 암호화된 사용자 비밀번호를 검증하는 용도
+
+    MemberService 에서 사용자의 비밀번호를 암호화 하여 Dao 에 전달하는 용도
     -->
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <constructor-arg index="0" value="4"/>
     </bean>
 
+    <!--
+    HTTP 테스트 환경에서 csrf 관련 Token 을 form 에 부착시키기 위한 helper class 를 bean 으로 선언
+    이 bean 은 http:csrf 속성에 부착한다
+    -->
     <bean id="cookieCsrfTokenRepository" class="org.springframework.security.web.csrf.CookieCsrfTokenRepository">
         <property name="cookieHttpOnly" value="false"/>
     </bean>
@@ -28,15 +36,16 @@
         <security:intercept-url pattern="/member/**" access="permitAll"/>
         <security:intercept-url pattern="/static" access="permitAll()"/>
         <security:intercept-url pattern="/webjars/**" access="permitAll()"/>
-        <security:intercept-url pattern="/" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
         <!-- * 로그인으로 요청된 패턴은 누구나 접속할 수 있고, 나머지 부분은 아무도 쓸 수 없게 만들기 -->
+        <security:logout/>
+        <security:csrf token-repository-ref="cookieCsrfTokenRepository"/>
+        <!-- * http 프로토콜에서 시큐리티를 사용하기 위한 설정. 위에서 선언해 준 bean 을 여기서 ~ -->
         <security:form-login
                 login-page="/member/login"
                 login-processing-url="/login"
                 username-parameter="username"
                 password-parameter="password"/>
-        <security:logout/>
-        <security:csrf token-repository-ref="cookieCsrfTokenRepository"/>
     </security:http>
 
     <context:component-scan base-package="com.csy.sec.service.auth"/>
