@@ -8,7 +8,7 @@ public class Message {
     public static class ERROR {
 
         // 대표 exception
-        public final static String BadCredentialsException
+        public final static String BadCredentials
                 = "아이디나 비밀번호가 맞지 않습니다. 다시 확인해 주세요";
         
         public final static String Disabled

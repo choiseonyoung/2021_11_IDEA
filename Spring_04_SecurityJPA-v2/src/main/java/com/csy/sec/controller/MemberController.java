@@ -25,6 +25,13 @@ public class MemberController {
     // login form 을 열기 위한 URL (* 우리가 만든 form 을 열기 위해 method 를 GET 으로 해줘야 한다)
     @RequestMapping(value="/login", method= RequestMethod.GET)
     public String login() {
+        log.debug("GET Login");
+        return "member/login";
+    }
+
+    @RequestMapping(value="/login",method=RequestMethod.POST)
+    public String login_fail() {
+        log.debug("POST Login");
         return "member/login";
     }
 

@@ -45,16 +45,18 @@
                 login-page="/member/login"
                 login-processing-url="/login"
                 username-parameter="username"
-                password-parameter="password"/>
+                password-parameter="password"
+                authentication-failure-handler-ref="loginFailService"
+        />
     </security:http>
 
     <context:component-scan base-package="com.csy.sec.service.auth"/>
     <!-- * 굳이 xml 파일에 bean 을 설정하기 않고 service.auth 패키지에 있는 걸 자동으로 ~ -->
 <!--    <bean id="loginService" class="com.csy.sec.service.auth.LoginService"></bean>-->
 
-    <!-- * 테스트용 사용자 로그인 검사? id가 csy가 비밀번호가 1234면 그 사용자는 ADMIN 이다 -->
+    <!-- * 테스트용 사용자 로그인 검사? id가 csy 가 비밀번호가 1234면 그 사용자는 ADMIN 이다 -->
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="loginService"/>
-        <!-- * 우리가 만든 loginService를 이용해 로그인을 수행해라 -->
+        <security:authentication-provider ref="authenticationProvider" user-service-ref="loginService"/>
+        <!-- * 우리가 만든 loginService 를 이용해 로그인을 수행해라 -->
     </security:authentication-manager>
 </beans>

@@ -100,9 +100,7 @@
     <div>
         <input name="username" id="username" placeholder="사용자 이름"/>
     </div>
-    <div class="input_error">
-
-    </div>
+    <div class="input_error"></div>
     <div>
         <input name="password" id="password" placeholder="비밀번호"/>
     </div>
