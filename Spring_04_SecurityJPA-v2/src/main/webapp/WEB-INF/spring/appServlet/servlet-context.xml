@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="com.csy.sec"/>
+
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/webjars/**" location="/webjars/">
+            <mvc:resource-chain resource-cache="false"/>
+    </mvc:resources>
+
+    <!-- * jsp 를 렌더링하는 .. 인터널리소스뷰리졸버를 이용해 views 폴더에 있는 jsp 렌더링 할 수 있도록-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
