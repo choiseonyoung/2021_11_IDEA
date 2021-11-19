@@ -31,17 +31,10 @@ public class MyBatisConfig {
     @Value("${db.password}")
     private String password;
 
-    private EnvironmentPBEConfig envConfig() {
-        EnvironmentPBEConfig config = new EnvironmentPBEConfig();
-        config.setAlgorithm("PBEWithMD5AndDES");
-        config.setPasswordEnvName("csy.com");
-        return config;
-    }
+    private final StandardPBEStringEncryptor encryptor;
 
-    private StandardPBEStringEncryptor encryptor() {
-        StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setConfig(this.envConfig());
-        return encryptor;
+    public MyBatisConfig(StandardPBEStringEncryptor encryptor) {
+        this.encryptor = encryptor;
     }
 
     // dataSource
@@ -50,8 +43,8 @@ public class MyBatisConfig {
         ds.setDriverClassName(driver);
         ds.setUrl(url);
 
-        String planUsername = this.encryptor().decrypt(username);
-        String planPassword = this.encryptor().decrypt(password);
+        String planUsername = encryptor.decrypt(username);
+        String planPassword = encryptor.decrypt(password);
 
         ds.setUsername(planUsername);
         ds.setPassword(planPassword);
